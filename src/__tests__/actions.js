@@ -11,4 +11,16 @@ describe('actions', () => {
 
     expect(actions.addTodo(text)).toEqual(expectedAction)
   })
+
+  it('should create an action to edit a todo', () => {
+    const expectedAction = {
+      type: actionTypes.EDIT_TODO,
+      payload: { id: 1, done: true }
+    }
+
+    expect(actions.editTodo({
+      id: 1,
+      done: true,
+    })).toEqual(expectedAction)
+  })
 })

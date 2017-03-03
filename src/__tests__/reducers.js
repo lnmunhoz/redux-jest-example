@@ -1,5 +1,6 @@
 import expect from 'expect';
-import { addTodo } from '../actions/todos';
+import uuid from 'node-uuid';
+import { addTodo, editTodo } from '../actions/todos';
 import todosReducer from '../reducers/todos';
 
 describe('reducers', () => {
@@ -13,5 +14,25 @@ describe('reducers', () => {
     expect(state.length).toEqual(1);
     expect(state[0].text).toEqual('New todo');
     expect(state[0].done).toEqual(false);
+  })
+
+  it('should edit a todo', () => {
+    const todoId = uuid.v4();
+    const initialState = [{
+      id: todoId,
+      text: 'New todo',
+      done: false
+    }, {
+      id: uuid.v4(),
+      text: 'Second todo',
+      done: true
+    }];
+
+    const state = todosReducer(initialState, editTodo({
+      id: todoId,
+      done: true
+    }));
+
+    expect(state[0].done).toEqual(true);
   })
 })

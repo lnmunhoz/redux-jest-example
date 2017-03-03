@@ -1,5 +1,5 @@
 import uuid from 'node-uuid';
-import { ADD_TODO } from '../constants/actionTypes';
+import { ADD_TODO, EDIT_TODO } from '../constants/actionTypes';
 
 export default (state = [], { type, payload }) => {
   switch(type){
@@ -11,7 +11,16 @@ export default (state = [], { type, payload }) => {
       }
 
       return [...state, todo];
-    default:
-      return state;
+
+     case EDIT_TODO:
+      return state.map(todo => {
+        if (todo.id === payload.id) {
+          return Object.assign({}, todo, {
+            done: payload.done
+          });
+        }
+      });
+     default:
+       return state;
   }
 }
