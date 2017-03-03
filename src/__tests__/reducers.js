@@ -9,6 +9,14 @@ describe('reducers', () => {
     expect(state).toEqual([]);
   })
 
+  it('should return state when action is not on reducer', () => {
+    const state = todosReducer(undefined, {
+      type: 'RANDOM_ACTION'
+    });
+    
+    expect(state).toEqual(state);
+  })
+
   it('should add a new todo to state', () => {
     const state = todosReducer(undefined, addTodo('New todo'));
     expect(state.length).toEqual(1);
