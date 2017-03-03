@@ -18,9 +18,8 @@
     "collectCoverage": true
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage && npm run coveralls",
     "test:watch": "npm test --watch",
-    "test:coverage": "npm test --coverage",
     "coveralls": "cat coverage/lcov.info | node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "repository": {
